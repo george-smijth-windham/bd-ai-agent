@@ -2,6 +2,7 @@ import argparse
 import os
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 
 
 def main():
@@ -16,9 +17,10 @@ def main():
     print("Hello from bd-ai-agent!")
     client = genai.Client(api_key=api_key)
     model = "gemini-2.5-flash"
+    messages = types.Content(role="user", parts=[types.Part(text=user_prompt)])
     response = client.models.generate_content(
         model=model,
-        contents=user_prompt,
+        contents=messages,
     )
     usage_metadata = response.usage_metadata
     if usage_metadata is None:
