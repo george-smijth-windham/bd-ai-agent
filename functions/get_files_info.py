@@ -17,15 +17,19 @@ def get_files_info(working_directory, directory="."):
         target_dir_contents = []
         for path in os.listdir(target_dir):
             name = path
-            path = os.path.join(target_dir, name)
-            size = os.path.getsize(path)
-            is_dir = os.path.isdir(path)
-            target_dir_contents.append(
-                f"- {name}: file_size={size} bytes, is_dir={is_dir}"
-            )
-        print(target_dir_contents)
+            if name != "__pycache__":
+                path = os.path.join(target_dir, name)
+                size = os.path.getsize(path)
+                is_dir = os.path.isdir(path)
+                target_dir_contents.append(
+                    f"- {name}: file_size={size} bytes, is_dir={is_dir}"
+                )
+            else:
+                continue
+        info = "\n".join(target_dir_contents)
+        return info
     except Exception as e:
-        return e
+        return str(e)
 
 
-print(get_files_info("calculator"))
+# print(get_files_info("calculator", "pkg"))
