@@ -1,5 +1,7 @@
 import os
 
+MAX_CHARS = 5
+
 
 def get_file_content(working_directory, file_path):
     try:
@@ -16,9 +18,17 @@ def get_file_content(working_directory, file_path):
             raise Exception(
                 f'Error: File not found or is not a regular file: "{file_path}"'
             )
-        return "next"
+        # print(abs_work_dir, target_file, sep="\n")
+        # return
+        with open(target_file, "r") as f:
+            file_content = f.read(MAX_CHARS)
+            file_content_overflow = f.read(5)
+            if file_content_overflow:
+                print("there is more content")
+            else:
+                print("file is under or at max chars")
     except Exception as e:
         return str(e)
 
 
-print(get_file_content("calculator", "/bin/cat"))
+print(get_file_content("calculator", "lorem.txt"))
