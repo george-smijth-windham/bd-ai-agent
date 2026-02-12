@@ -1,6 +1,6 @@
 import os
 
-MAX_CHARS = 5
+MAX_CHARS = 10000
 
 
 def get_file_content(working_directory, file_path):
@@ -18,15 +18,19 @@ def get_file_content(working_directory, file_path):
             raise Exception(
                 f'Error: File not found or is not a regular file: "{file_path}"'
             )
-        # print(abs_work_dir, target_file, sep="\n")
-        # return
         with open(target_file, "r") as f:
             file_content = f.read(MAX_CHARS)
-            file_content_overflow = f.read(5)
-            if file_content_overflow:
-                print("there is more content")
-            else:
-                print("file is under or at max chars")
+            print(
+                f"file length: {len(file_content)}",
+                f"content repr: {repr(file_content)}",
+                sep="\n",
+            )
+            file_content = f.read(1)
+            print(
+                f"file length: {len(file_content)}",
+                f"content repr: {repr(file_content)}",
+                sep="\n",
+            )
     except Exception as e:
         return str(e)
 
