@@ -20,17 +20,11 @@ def get_file_content(working_directory, file_path):
             )
         with open(target_file, "r") as f:
             file_content = f.read(MAX_CHARS)
-            print(
-                f"file length: {len(file_content)}",
-                f"content repr: {repr(file_content)}",
-                sep="\n",
-            )
-            file_content = f.read(1)
-            print(
-                f"file length: {len(file_content)}",
-                f"content repr: {repr(file_content)}",
-                sep="\n",
-            )
+            if f.read(1):
+                file_content += (
+                    f'[...File "{file_path}" truncated at {MAX_CHARS} characters]'
+                )
+            return file_content
     except Exception as e:
         return str(e)
 
