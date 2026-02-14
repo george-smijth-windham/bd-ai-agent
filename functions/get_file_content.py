@@ -1,6 +1,6 @@
 import os
 
-MAX_CHARS = 10000
+from config import MAX_CHARS
 
 
 def get_file_content(working_directory, file_path):
@@ -29,4 +29,4 @@ def get_file_content(working_directory, file_path):
         return str(e)
 
 
-print(get_file_content("calculator", "lorem.txt"))
+# print(get_file_content("calculator", "lorem.txt"))
