@@ -1,4 +1,4 @@
-from os import path
+from os import path, makedirs
 
 
 def write_file(working_directory, file_path, content):
@@ -14,9 +14,12 @@ def write_file(working_directory, file_path, content):
             raise Exception(
                 f'Error: Cannot write to "{file_path}" as it is a directory'
             )
-        return ("continue", target_path)
+        target_dir = path.dirname(target_path)
+        makedirs(target_dir, exist_ok=True)
+        with open(target_path, "w") as f:
+            f.write(content)
+        return (
+            f'Successfully wrote to "{file_path}" ({len(content)} characters written)'
+        )
     except Exception as e:
         return str(e)
-
-
-print(write_file("calculator", "/tmp/temp.txt", "this should not be allowed"))
