@@ -27,6 +27,3 @@ def get_file_content(working_directory, file_path):
             return file_content
     except Exception as e:
         return str(e)
-
-
-# print(get_file_content("calculator", "lorem.txt"))
