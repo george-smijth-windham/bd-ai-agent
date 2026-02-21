@@ -1,4 +1,5 @@
 from os import path
+import subprocess
 
 
 def run_python_file(working_directory, file_path, args=None):
@@ -17,7 +18,10 @@ def run_python_file(working_directory, file_path, args=None):
             )
         if not file_ext or file_ext != ".py":
             raise Exception(f'Error: "{file_path}" is not a Python file')
-        return file_ext
+        command = ["python", target_path]
+        if args:
+            command.extend(args)
+        completed_process = subprocess.run(command, text=True)
 
     except Exception as e:
         return str(e)
