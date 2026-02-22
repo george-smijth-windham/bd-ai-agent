@@ -1,6 +1,8 @@
 from os import path
 import subprocess
 
+SUB_PROCESS_TIMER = 30.0
+
 
 def run_python_file(working_directory, file_path, args=None):
     try:
@@ -21,11 +23,26 @@ def run_python_file(working_directory, file_path, args=None):
         command = ["python", target_path]
         if args:
             command.extend(args)
-        completed_process = subprocess.run(command, text=True)
-
+        completed_process = subprocess.run(
+            command,
+            cwd=work_path,
+            text=True,
+            timeout=SUB_PROCESS_TIMER,
+            capture_output=True,
+        )
+        result = ""
+        returncode, stdout, stderr = (
+            completed_process.returncode,
+            completed_process.stdout,
+            completed_process.stderr,
+        )
+        if returncode:
+            result += f"Process exited with code {returncode}\n"
+        if stderr == "" and stdout == "":
+            result += "No output produced\n"
+        else:
+            result += f"STDOUT:\n{stdout}" if stdout else ""
+            result += f"STDERR:\n{stderr}" if stderr else ""
+        return result
     except Exception as e:
         return str(e)
-
-
-result = run_python_file("calculator", "main.py")
-print(result)
