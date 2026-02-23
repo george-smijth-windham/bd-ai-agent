@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from prompts import system_prompt
 
 
 def main():
@@ -25,6 +26,7 @@ def main():
     response = client.models.generate_content(
         model=model,
         contents=messages,
+        config=types.GenerateContentConfig(system_instruction=system_prompt),
     )
     usage_metadata = response.usage_metadata
     if usage_metadata is None:
@@ -33,7 +35,7 @@ def main():
     candidates_token_count = usage_metadata.candidates_token_count
     if verbose:
         print(
-            f"User prompt: Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum.",
+            f"User prompt: {user_prompt}",
             f"Prompt tokens: {prompt_token_count}",
             f"Response tokens: {candidates_token_count}",
             f"Response:",
