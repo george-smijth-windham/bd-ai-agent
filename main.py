@@ -31,20 +31,30 @@ def main():
             tools=[available_functions], system_instruction=system_prompt
         ),
     )
+    function_calls = response.function_calls
     usage_metadata = response.usage_metadata
     if usage_metadata is None:
         raise RuntimeError("there is a problem with request")
     prompt_token_count = usage_metadata.prompt_token_count
     candidates_token_count = usage_metadata.candidates_token_count
-    if verbose:
-        print(
-            f"User prompt: {user_prompt}",
-            f"Prompt tokens: {prompt_token_count}",
-            f"Response tokens: {candidates_token_count}",
-            f"Response:",
-            response.text,
-            sep="\n",
-        )
+    # if verbose:
+    #     print(
+    #         f"User prompt: {user_prompt}",
+    #         f"Prompt tokens: {prompt_token_count}",
+    #         f"Response tokens: {candidates_token_count}",
+    #         f"Response:",
+    #         response.text,
+    #         sep="\n",
+    #     )
+    # else:
+    #     print(
+    #         f"Response:",
+    #         response.text,
+    #         sep="\n",
+    #     )
+    if len(function_calls):
+        for call in function_calls:
+            print(f"Calling function: {call.name}({call.args})")
     else:
         print(
             f"Response:",
