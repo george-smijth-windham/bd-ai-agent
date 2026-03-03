@@ -1,7 +1,5 @@
 from google.genai import types
 
-schema_names = []
-
 get_files_info = types.FunctionDeclaration(
     name="get_files_info",
     description="Lists files in a specified directory relative to the working directory, providing file size and directory status",
@@ -15,6 +13,16 @@ get_files_info = types.FunctionDeclaration(
         },
     ),
 )
+
 get_file_content = types.FunctionDeclaration(
-    name="get_file_content", description="Read contents of a file"
+    name="get_file_content",
+    description="Get the contents of a file",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING, description="File path of the content"
+            )
+        },
+    ),
 )
