@@ -26,3 +26,16 @@ get_file_content = types.FunctionDeclaration(
         },
     ),
 )
+
+write_file = types.FunctionDeclaration(
+    name=" name ",
+    description=" description ",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING, description=" description "
+            )
+        },
+    ),
+)
