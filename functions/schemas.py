@@ -28,7 +28,7 @@ get_file_content = types.FunctionDeclaration(
 )
 
 write_file = types.FunctionDeclaration(
-    name=" name ",
+    name="write_file",
     description=" description ",
     parameters=types.Schema(
         type=types.Type.OBJECT,
