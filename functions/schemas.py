@@ -16,12 +16,12 @@ get_files_info = types.FunctionDeclaration(
 
 get_file_content = types.FunctionDeclaration(
     name="get_file_content",
-    description="Get the contents of a file",
+    description="Read from a file",
     parameters=types.Schema(
         type=types.Type.OBJECT,
         properties={
             "file_path": types.Schema(
-                type=types.Type.STRING, description="File path of the content"
+                type=types.Type.STRING, description="File path to content"
             )
         },
     ),
@@ -29,12 +29,12 @@ get_file_content = types.FunctionDeclaration(
 
 write_file = types.FunctionDeclaration(
     name="write_file",
-    description="write contents to file",
+    description="Write to a file",
     parameters=types.Schema(
         type=types.Type.OBJECT,
         properties={
             "file_path": types.Schema(
-                type=types.Type.STRING, description=" description "
+                type=types.Type.STRING, description="File path to content"
             )
         },
     ),
