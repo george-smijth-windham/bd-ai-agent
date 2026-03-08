@@ -21,7 +21,7 @@ get_file_content = types.FunctionDeclaration(
         type=types.Type.OBJECT,
         properties={
             "file_path": types.Schema(
-                type=types.Type.STRING, description="File path to content"
+                type=types.Type.STRING, description="File path to read from"
             )
         },
     ),
@@ -34,8 +34,12 @@ write_file = types.FunctionDeclaration(
         type=types.Type.OBJECT,
         properties={
             "file_path": types.Schema(
-                type=types.Type.STRING, description="File path to content"
-            )
+                type=types.Type.STRING, description="File path to write at"
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING, description="New content to write at file path"
+            ),
         },
+        required=["file_path", "content"],
     ),
 )

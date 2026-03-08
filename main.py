@@ -52,9 +52,12 @@ def main():
     #         response.text,
     #         sep="\n",
     #     )
-    if len(function_calls):
+    if function_calls is not None:
         for call in function_calls:
             print(f"Calling function: {call.name}({call.args})")
+    # if len(function_calls):
+    # for call in function_calls:
+    # print(f"Calling function: {call.name}({call.args})")
     else:
         print(
             f"Response:",
