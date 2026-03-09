@@ -43,3 +43,20 @@ write_file = types.FunctionDeclaration(
         required=["file_path", "content"],
     ),
 )
+
+run_python_file = types.FunctionDeclaration(
+    name="run_python_file",
+    description="run a python file",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="File path of file to run",
+            ),
+            "args": types.Schema(
+                type=types.Type.ARRAY,
+            ),
+        },
+    ),
+)
