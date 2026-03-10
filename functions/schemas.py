@@ -56,7 +56,10 @@ run_python_file = types.FunctionDeclaration(
             ),
             "args": types.Schema(
                 type=types.Type.ARRAY,
+                description="A list of string args",
+                items=types.Schema(type=types.Type.STRING),
             ),
         },
+        required=["file_path"],
     ),
 )
