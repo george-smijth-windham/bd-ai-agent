@@ -14,3 +14,7 @@ available_functions = types.Tool(
         run_python_file,
     ]
 )
+
+
+def call_function(function_call, verbose=False):
+    pass
