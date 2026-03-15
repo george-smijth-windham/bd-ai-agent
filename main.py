@@ -52,9 +52,26 @@ def main():
     #         response.text,
     #         sep="\n",
     #     )
+    function_results = []
     if function_calls is not None:
         for call in function_calls:
-            print(f"Calling function: {call.name}({call.args})")
+            function_call_result = call_function(call, verbose)
+            # if not function_call_result.parts:
+            #     raise Exception("parts should not be empty")
+            # function_response = function_call_result.parts[0].function_response
+            # if function_response is None:
+            #     raise Exception("response should be instance of 'FunctionResponse'")
+            # if
+            if not function_call_result.parts:
+                raise Exception("parts should not be empty")
+            if function_call_result.parts[0].function_response is None:
+                raise Exception("response should be instance of 'FunctionResponse'")
+            if function_call_result.parts[0].function_response.response is None:
+                raise Exception("response is none")
+            function_results.append(function_call_result.parts[0])
+            if verbose:
+                print(f"-> {function_call_result.parts[0].function_response.response}")
+            # print(f"Calling function: {call.name}({call.args})")
     # if len(function_calls):
     # for call in function_calls:
     # print(f"Calling function: {call.name}({call.args})")

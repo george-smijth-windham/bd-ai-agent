@@ -1,25 +1,30 @@
 from google.genai import types
 from functions.schemas import (
-    get_files_info,
-    get_file_content,
-    write_file,
-    run_python_file,
+    get_files_info as get_files_info_schema,
+    get_file_content as get_file_content_schema,
+    write_file as write_file_schema,
+    run_python_file as run_python_file_schema,
 )
+from functions.get_files_info import get_files_info as fn_get_files_info
+from functions.get_file_content import get_file_content as fn_get_file_content
+from functions.write_file import write_file as fn_write_file
+from functions.run_python_file import run_python_file as fn_run_python_file
+
 
 available_functions = types.Tool(
     function_declarations=[
-        get_files_info,
-        get_file_content,
-        write_file,
-        run_python_file,
+        get_files_info_schema,
+        get_file_content_schema,
+        write_file_schema,
+        run_python_file_schema,
     ]
 )
 
 function_map = {
-    "get_files_info": get_files_info,
-    "get_file_content": get_file_content,
-    "write_file": write_file,
-    "run_python_file": run_python_file,
+    "get_files_info": fn_get_files_info,
+    "get_file_content": fn_get_file_content,
+    "write_file": fn_write_file,
+    "run_python_file": fn_run_python_file,
 }
 
 
