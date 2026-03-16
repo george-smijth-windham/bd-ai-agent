@@ -24,6 +24,11 @@ def main():
     client = genai.Client(api_key=api_key)
     model = "gemini-2.5-flash"
     messages = types.Content(role="user", parts=[types.Part(text=user_prompt)])
+    # agent loop
+    for i in range(20):
+        print(i)
+        pass
+    return
     response = client.models.generate_content(
         model=model,
         contents=messages,
