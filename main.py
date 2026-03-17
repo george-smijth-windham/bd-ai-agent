@@ -27,7 +27,6 @@ def main():
     # agent loop
     for i in range(20):
         print(i)
-        pass
     return
     response = client.models.generate_content(
         model=model,
