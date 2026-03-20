@@ -6,14 +6,8 @@ from google.genai import types
 from prompts import system_prompt
 from functions.call_function import available_functions, call_function
 
-x = None
-x = [] if x is None else x
-
 
 def main():
-    # for a in x:
-    #     pass
-    # return
     parser = argparse.ArgumentParser(description="Chatbot")
     parser.add_argument("user_prompt", type=str, help="User prompt")
     parser.add_argument(
@@ -47,31 +41,11 @@ def main():
             raise RuntimeError("there is a problem with request")
         prompt_token_count = usage_metadata.prompt_token_count
         candidates_token_count = usage_metadata.candidates_token_count
-        # if verbose:
-        #     print(
-        #         f"User prompt: {user_prompt}",
-        #         f"Prompt tokens: {prompt_token_count}",
-        #         f"Response tokens: {candidates_token_count}",
-        #         f"Response:",
-        #         response.text,
-        #         sep="\n",
-        #     )
-        # else:
-        #     print(
-        #         f"Response:",
-        #         response.text,
-        #         sep="\n",
-        #     )
         function_results = []
         if function_calls is not None:
             for call in function_calls:
                 function_call_result = call_function(call, verbose)
-                # if not function_call_result.parts:
-                #     raise Exception("parts should not be empty")
-                # function_response = function_call_result.parts[0].function_response
-                # if function_response is None:
-                #     raise Exception("response should be instance of 'FunctionResponse'")
-                # if
+
                 if not function_call_result.parts:
                     raise Exception("parts should not be empty")
                 if function_call_result.parts[0].function_response is None:
@@ -84,10 +58,6 @@ def main():
                     print(
                         f"-> {function_call_result.parts[0].function_response.response}"
                     )
-                # print(f"Calling function: {call.name}({call.args})")
-        # if len(function_calls):
-        # for call in function_calls:
-        # print(f"Calling function: {call.name}({call.args})")
         else:
             print(
                 f"Response:",
